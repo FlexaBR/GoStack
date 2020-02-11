@@ -1,25 +1,25 @@
 import 'dotenv/config';
+import { resolve } from 'path';
 
 import express from 'express';
-import path from 'path';
 import routes from './routes';
 
 import './database';
 
 class App {
   constructor() {
-    // Executa automatico (constroi) quando a classe é chamada.
     this.server = express();
-
     this.middlewares();
     this.routes();
   }
 
   middlewares() {
     this.server.use(express.json());
+
+    // Midleware para acessar arquivos estáticos
     this.server.use(
       '/files',
-      express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+      express.static(resolve(__dirname, '..', 'tmp', 'uploads'))
     );
   }
 

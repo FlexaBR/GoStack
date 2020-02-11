@@ -1,12 +1,11 @@
-
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('files', {
+    return queryInterface.createTable('signatures', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: {
         type: Sequelize.STRING,
@@ -28,8 +27,7 @@ module.exports = {
     });
   },
 
-  // eslint-disable-next-line no-unused-vars
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('files');
+  down: queryInterface => {
+    return queryInterface.dropTable('signatures');
   },
 };

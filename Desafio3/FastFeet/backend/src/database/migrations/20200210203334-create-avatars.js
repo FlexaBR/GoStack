@@ -1,6 +1,7 @@
+
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('deliverymans', {
+    return queryInterface.createTable('avatars', {
       id: {
         type: Sequelize.INTEGER,
         allowNull: false,
@@ -11,14 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      avatar_id: {
-        type: Sequelize.INTEGER,
-        references: { model: 'avatars', key: 'id' },
-        onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
-        allowNull: true,
-      },
-      email: {
+      path: {
         type: Sequelize.STRING,
         allowNull: false,
         unique: true,
@@ -36,6 +30,6 @@ module.exports = {
 
   // eslint-disable-next-line no-unused-vars
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('deliverymans');
+    return queryInterface.dropTable('avatars');
   },
 };

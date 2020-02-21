@@ -21,6 +21,7 @@ routes.post('/sessions', SessionController.store);
 
 routes.use(authMiddleware); // Tudo que vem depois passa pelo authMiddleware
 
+routes.get('/users', UserController.index);
 routes.put('/users', UserController.update);
 
 routes.get('/providers', ProviderController.index);

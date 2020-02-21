@@ -1,0 +1,15 @@
+Tirei da config inicial do professor no
+arquivo .eslintrc:
+settings: {
+    "import/resolver": {
+      "babel-plugin-root-import": {
+        rootPathSuffix: "src"
+      },
+    },
+  },
+
+Coloquei novamente após intalação e config do
+config-override.js
+
+_____________________
+

@@ -4,19 +4,21 @@ import Sequelize from 'sequelize';
 import User from '../app/models/User';
 import Avatar from '../app/models/Avatar';
 import Deliveryman from '../app/models/Deliveryman';
-import Order from '../app/models/Order';
+import Delivery from '../app/models/Delivery';
 import Recipient from '../app/models/Recipient';
 import Signature from '../app/models/Signature';
+import DeliveryProblem from '../app/models/DeliveryProblem';
 
 import databaseConfig from '../config/database';
 
 const models = [
   User,
   Avatar,
+  Delivery,
   Deliveryman,
-  Order,
   Recipient,
-  Signature
+  Signature,
+  DeliveryProblem,
 ];
 
 class Database {

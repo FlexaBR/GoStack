@@ -61,7 +61,7 @@ class AppointmentController {
         .json({ error: 'You can only create appointments with providers' });
     }
 
-    const hourStart = startOfHour(parseISO(date)); // parseIso pega somente a hora, tira minutos
+    const hourStart = startOfHour(parseISO(date));
 
     if (isBefore(hourStart, new Date())) {
       return res.status(400).json({ error: 'Past dates are not permitted' });

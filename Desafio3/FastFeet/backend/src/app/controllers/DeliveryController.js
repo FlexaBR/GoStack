@@ -1,15 +1,18 @@
 import * as Yup from 'yup';
 
 import Deliveryman from '../models/Deliveryman';
-import Order from '../models/Order';
+import Delivery from '../models/Delivery';
 import Recipient from '../models/Recipient';
 import Signature from '../models/Signature';
 
-class OrderController {
+import Queue from '../../lib/Queue';
+import NewDeliveryMail from '../jobs/NewDeliveryMail';
+
+class DeliveryController {
   async index(req, res) {
     const { page } = req.query;
 
-    const orders = await Order.findAll({
+    const deliveries = await Delivery.findAll({
       attributes: [
         'id',
         'product',
@@ -24,7 +27,7 @@ class OrderController {
         {
           model: Recipient,
           as: 'recipient',
-          attributes: ['nome', 'rua', 'cidade'],
+          attributes: ['nome', 'rua', 'numero', 'complemento', 'cidade', 'estado', 'cep'],
         },
         {
           model: Deliveryman,
@@ -42,7 +45,7 @@ class OrderController {
       order: [['created_at', 'ASC']],
     });
 
-    return res.json(orders);
+    return res.json(deliveries);
   }
 
   async store(req, res) {
@@ -75,15 +78,21 @@ class OrderController {
       return res.status(400).json({ error: 'Deliveryman does not exist' });
     }
 
-    const order = await Order.create(req.body);
+    const delivery = await Delivery.create(req.body);
 
-    return res.json(order);
+    await Queue.add(NewDeliveryMail.key, {
+      recipient,
+      deliveryman,
+      delivery,
+    });
+
+    return res.json(delivery);
   }
 
   async update(req, res) {
-    const order = await Order.findByPk(req.params.id);
-    if (!order) {
-      return res.status(400).json({ error: 'This order does not exist' });
+    const delivery = await Delivery.findByPk(req.params.id);
+    if (!delivery) {
+      return res.status(400).json({ error: 'This delivery does not exist' });
     }
 
     const schema = Yup.object().shape({
@@ -111,7 +120,7 @@ class OrderController {
       return res.status(400).json({ error: 'Deliveryman does not exist' });
     }
 
-    const { id, product } = await order.update(req.body);
+    const { id, product } = await delivery.update(req.body);
 
     return res.json({
       id,
@@ -122,16 +131,16 @@ class OrderController {
   }
 
   async delete(req, res) {
-    const order = await Order.findByPk(req.params.id);
+    const delivery = await Delivery.findByPk(req.params.id);
 
-    if (!order) {
-      return res.status(400).json({ error: 'This order does not exist' });
+    if (!delivery) {
+      return res.status(400).json({ error: 'This delivery does not exist' });
     }
 
-    await order.destroy();
+    await delivery.destroy();
 
     return res.json();
   }
 }
 
-export default new OrderController();
+export default new DeliveryController();

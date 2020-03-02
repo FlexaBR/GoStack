@@ -1,0 +1,8 @@
+dev mode
+
+backend:
+terminal 1: yarn dev
+terminal 2: yarn queue    => jobs
+
+frontend:
+yarn start

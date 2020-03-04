@@ -1,0 +1,4 @@
+#Mon Mar 02 18:02:37 BRT 2020
+base.0=D\:\\myDocs\\Estudos\\Rocketseat\\GoStack\\Desafio9\\FastFeet\\mobile\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+path.0=classes.dex
+renamed.0=classes.dex

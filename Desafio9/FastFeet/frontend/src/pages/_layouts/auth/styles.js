@@ -15,34 +15,35 @@ export const Content = styled.div`
   background: #FFF;
   border-radius: 4px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  padding: 30px;
+  padding: 0 30px;
   text-align: center;
 
   img {
-    padding-top: 40px;
+    margin-top: 60px;
   }
 
   form {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
+    margin: 40px 0 60px 0;
 
     h4 {
       display: flex;
       font-size: 14px;
-      align-items: center;
-      margin: 5px 0;
-      padding-top: 10px;
+      margin: 20px 0 12px 0;
       color: #444444;
+    }
+
+    h4:first-child {
+      margin: 0 0 12px 0;
     }
 
     input {
       border: 1px solid #DDDDDD;
       border-radius: 4px;
-      height: 44px;
+      height: 45px;
       padding: 0 15px;
       font-size: 16px;
-      margin: 0 0 10px;
       color: #444444;
 
       &::placeholder {
@@ -55,18 +56,18 @@ export const Content = styled.div`
       align-self: flex-start;
       margin: 0 0 2px;
       font-weight: bold;
-      font-size: 10px;
+      font-size: 11px;
     }
 
     button {
-      margin: 5px 0 0;
-      height: 44px;
+      height: 45px;
       background: #7D40E7;
       font-weight: bold;
       color: #fff;
       border: 0;
       border-radius: 4px;
       font-size: 16px;
+      margin-top: 15px;
       transition: background 0.2s;
 
       &:hover {

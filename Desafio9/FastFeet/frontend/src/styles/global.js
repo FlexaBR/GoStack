@@ -22,7 +22,8 @@ export default createGlobalStyle`
   }
 
   body {
-    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
     background: #F5F5F5;
   }
 

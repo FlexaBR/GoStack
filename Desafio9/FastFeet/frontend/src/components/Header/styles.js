@@ -2,49 +2,57 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   background: #fff;
-  padding: 0 30px;
-`;
-
-export const Content = styled.div`
   height: 64px;
-  max-width: 1440px;
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-around;
+  box-shadow: 0 1px 1px #DDDDDD;
+  padding: 0 30px;
+  position: relative;
+  z-index: 1;
 
   nav {
     display: flex;
     align-items: center;
 
     img {
-      margin-right: 20px;
-      padding-right: 20px;
-      border-right: 1px solid #eee;
+      max-height: 32px;
+      border-right: 1px solid #DDDDDD;
     }
+  }
+`;
+
+export const Content = styled.div`
+  flex: 1;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 32px;
+
+  button {
+    margin-right: 20px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #444444;
+    border: 0;
+    background: none;
   }
 `;
 
 export const User = styled.div`
   display: flex;
-  margin-left: 20px;
-  padding-left: 20px;
+  flex-direction: column;
+  text-align: right;
 
-  div {
-    text-align: right;
-    margin-right: 10px;
+  strong {
+    font-size: 14px;
+    color: #666666;
+  }
 
-    strong {
-      display: block;
-      font-size: 14px;
-      color: #666666;
-    }
-
-    a {
-      display: block;
-      margin-top: 2px;
-      font-size: 14px;
-      color: #DE3B3B;
-    }
+  button {
+    margin-top: 2px;
+    font-size: 14px;
+    color: #DE3B3B;
+    border: 0;
+    background: none;
   }
 `;

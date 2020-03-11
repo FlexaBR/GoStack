@@ -1,8 +1,8 @@
 dev mode
 
-backend:
+cd /backend:
 terminal 1: yarn dev
 terminal 2: yarn queue    => jobs
 
-frontend:
+cd /frontend:
 yarn start

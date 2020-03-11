@@ -1,0 +1,33 @@
+nav#header {
+  background-color: #4a90e2;
+  color: #fff;
+  padding: 0 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  height: 64px;
+}
+nav#header img {
+}
+nav#header #user-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+nav#header #user-info p {
+  margin-right: 10px;
+  font-weight: bold;
+}
+nav#header #user-info a {
+  text-decoration: none;
+  color: #fff;
+  padding: 4px;
+}
+nav#header #user-info a img {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}

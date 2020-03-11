@@ -1,0 +1,68 @@
+.post {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 14px;
+  margin-bottom: 15px;
+}
+
+.post header {
+  display: flex;
+}
+
+.post header img {
+  width: 32px;
+  height: 32px;
+  margin-right: 10px;
+  border-radius: 50%;
+  border: 2px solid #4a90e2;
+}
+
+.post header .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post header .user-info p {
+  font-size: 14px;
+}
+
+.post header .user-info small {
+  font-size: 10px;
+}
+
+.post .post-content {
+  font-size: 14px;
+  margin-top: 10px;
+  color: #333;
+}
+
+.post .divider {
+  border-top: 1px solid #ccc;
+  margin: 20px 0;
+}
+
+.post .comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.post .comments .comment {
+  display: flex;
+  flex-direction: row;
+}
+
+.post .comments .comment a {
+  margin-right: 10px;
+}
+.post .comments .comment a img {
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.post .comments .comment p {
+  background: #eee;
+  padding: 10px;
+  border-radius: 16px;
+  font-size: 14px;
+  width: 100%;
+}

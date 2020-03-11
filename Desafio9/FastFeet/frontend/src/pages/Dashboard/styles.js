@@ -27,7 +27,7 @@ export const Form = styled.form`
       color: #999999;
       font-size: 14px;
       margin-top: 35px;
-      background: #FFFFFF url('/../../assets/ic_search_24px.png') no-repeat 207px center;
+      background: #f5f8fa url('/images/search.svg') no-repeat 190px center;
     }
   }
 `;

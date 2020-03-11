@@ -12,7 +12,7 @@ export default function Dashboard() {
       <Form onSubmit={() => {}}>
 
         <h1>Gerenciando encomendas</h1>
-        <div class="search">
+        <div class='search'>
           <input
             type="text"
             placeholder="Buscar por encomendas"

@@ -19,7 +19,7 @@ function App() {
     <Provider store={store}>
       <PersistGate persistor={persistor}>
         {/* // renderiza somente depois de
-          carregar os dados do persistor  */}
+          carregar os dados do persistor (localStorage) */}
         <Router history={history}>
           <Routes />
           <GlobalStyle />

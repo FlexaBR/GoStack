@@ -5,30 +5,51 @@ import Recipient from '../models/Recipient';
 
 class RecipientController {
   async index(req, res) {
-    const { page } = req.query;
-    const recipientQuery = `%${req.query.q}%`;
+    const { id, page, q } = req.query;
 
-    const recipients = await Recipient.findAll({
-      where: {
-        nome: {
-          [Op.iLike]: recipientQuery,
-        },
-      },
-      attributes: [
-        'id',
-        'nome',
-        'rua',
-        'numero',
-        'complemento',
-        'cidade',
-        'estado',
-        'cep',
-      ],
-      limit: 20,
-      offset: (page - 1) * 20,
-    });
+    if (id) {
+      const recipientExists = await Recipient.findByPk(id);
+
+      if (!recipientExists) {
+        return res.status(400).json({ error: 'Recipient not found.' });
+      }
+
+      return res.json(recipientExists);
+    }
+
+    if (page) {
+      const limit = 5;
+
+      const where = q ? { nome: { [Op.iLike]: `%${q}%` } } : {};
+
+      const recipientsCount = await Recipient.count({ where });
+
+      const lastPage = page * limit >= recipientsCount;
+
+      const recipients = await Recipient.findAll({
+        where,
+        limit,
+        offset: (page - 1) * limit,
+        attributes: [
+          'id',
+          'nome',
+          'rua',
+          'numero',
+          'complemento',
+          'cidade',
+          'estado',
+          'cep',
+        ],
+        order: [['created_at', 'ASC']],
+      });
+
+      return res.json({ lastPage, content: recipients });
+    }
+
+    const recipients = await Recipient.findAll();
 
     return res.json(recipients);
+
   }
 
   async store(req, res) {

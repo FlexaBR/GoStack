@@ -32,7 +32,9 @@ export default function SignIn() {
         <h4>SUA SENHA</h4>
         <Input name="password" type="password" placeholder="*************" />
 
-        <button type="submit">{loading ? 'Carregando...' : 'Entrar no sistema'}</button>
+        <button type="submit">
+          {loading ? 'Carregando...' : 'Entrar no sistema'}
+        </button>
       </Form>
     </>
   );

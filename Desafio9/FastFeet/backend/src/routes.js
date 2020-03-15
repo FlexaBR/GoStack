@@ -29,10 +29,7 @@ routes.post('/users', UserController.store);
 routes.post('/sessions', SessionController.store);
 
 // Listagem das entregas pendente/concluídas/canceladas pelo entregador
-routes.get(
-  '/deliveryman/:id/deliveries',
-  DeliveriesOpenedController.index
-);
+routes.get('/deliveryman/:id/deliveries', DeliveriesOpenedController.index);
 
 routes.get(
   '/deliveryman/:id/deliveries/closed',
@@ -53,8 +50,10 @@ routes.put(
 // Entrega da Encomenda e Coleta da Assinatura de Recebimento
 routes.post('/signatures', upload.single('file'), SignatureController.store);
 
-routes.put('/deliveryman/:deliverymanId/deliverycheckout/',
-DeliveryCheckOutController.update);
+routes.put(
+  '/deliveryman/:deliverymanId/deliverycheckout/',
+  DeliveryCheckOutController.update
+);
 
 // Cadastrar Problemas na entrega (Entregador)
 routes.post('/delivery/:deliveryId/problems', DeliveryProblemController.store);
@@ -81,7 +80,6 @@ routes.post('/recipients', RecipientController.store);
 routes.get('/recipients', RecipientController.index);
 routes.put('/recipients/:id', RecipientController.update);
 routes.delete('/recipients/:id', RecipientController.delete);
-
 
 // Entregador
 routes.post('/deliverymans', DeliverymanController.store);

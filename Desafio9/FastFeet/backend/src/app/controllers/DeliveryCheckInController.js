@@ -31,19 +31,27 @@ class DeliveryCheckInController {
     }
 
     const { delivery_id } = req.body;
+
     const delivery = await Delivery.findOne({
       where: {
         id: delivery_id,
         deliveryman_id,
-        start_date: null,
+        // start_date: null,
       },
     });
 
-    // Verificando se a encomenda é realmente do entregrador
+    // Verificando se a encomenda existe
     if (!delivery) {
-      return res.status(401).json({ error: 'Does not your deliveries' });
+      return res.status(401).json({ error: 'Delivery does not exists' });
     }
-
+    // Verificando se a encomenda já foi retirada
+    if (delivery.start_date) {
+      return res.status(401).json({ error: 'Delivery already withdrawn' });
+    }
+    // Verificando se a encomenda já não foi entregue
+    if (delivery.end_date) {
+      return res.status(401).json({ error: 'Delivery is delivered' });
+    }
     // Verificando o limite de retirada de encomenda, máximo 5 por dia p/ entregador
     const dateNow = new Date();
 

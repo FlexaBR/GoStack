@@ -6,28 +6,47 @@ import Deliveryman from '../models/Deliveryman';
 
 class DeliverymanController {
   async index(req, res) {
+    const { id, page, q } = req.query;
 
-    const { page } = req.query;
-    const deliverymanQuery = `%${req.query.q}%`;
+    if (id) {
+      const deliverymanExists = await Deliveryman.findByPk(id);
 
-    const deliverymans = await Deliveryman.findAll({
-      where: {
-        name: {
-          [Op.iLike]: deliverymanQuery,
-        },
-      },
-      attributes: ['id', 'name', 'email', 'avatar_id'],
-      limit: 20,
-      offset: (page - 1) * 20,
-      include: [
-        {
-          model: Avatar,
-          as: 'avatar',
-          // Precisa passar o path p/ printar a url
-          attributes: ['path', 'url'],
-        },
-      ],
-    });
+      if (!deliverymanExists) {
+        return res.status(400).json({ error: 'Deliveryman not found.' });
+      }
+
+      return res.json(deliverymanExists);
+    }
+
+    if (page) {
+      const limit = 5;
+
+      const where = q ? { name: { [Op.iLike]: `%${q}%` } } : {};
+
+      const deliverymansCount = await Deliveryman.count({ where });
+
+      const lastPage = page * limit >= deliverymansCount;
+
+      const deliverymans = await Deliveryman.findAll({
+        where,
+        limit,
+        offset: (page - 1) * limit,
+        attributes: ['id', 'name', 'email', 'avatar_id'],
+        include: [
+          {
+            model: Avatar,
+            as: 'avatar',
+            // Precisa passar o path p/ printar a url
+            attributes: ['path', 'url'],
+          },
+        ],
+        order: [['created_at', 'ASC']],
+      });
+
+      return res.json({ lastPage, content: deliverymans });
+    }
+
+    const deliverymans = await Deliveryman.findAll();
 
     return res.json(deliverymans);
   }

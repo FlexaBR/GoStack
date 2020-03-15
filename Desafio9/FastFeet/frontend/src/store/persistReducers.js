@@ -6,7 +6,7 @@ export default reducers => {
     {
       key: 'fastfeet',
       storage,
-      whitelist: ['auth'],
+      whitelist: ['auth', 'user'], // colocar os reducers que quero persisitir em caso de F5 (exemplo)
     },
     reducers
   );

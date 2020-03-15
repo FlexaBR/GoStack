@@ -11,46 +11,73 @@ import NewDeliveryMail from '../jobs/NewDeliveryMail';
 
 class DeliveryController {
   async index(req, res) {
-    const { page } = req.query;
-    const productQuery = `%${req.query.q}%`;
+    const { id, page, q } = req.query;
 
-    const deliveries = await Delivery.findAll({
-      where: {
-        product: {
-          [Op.iLike]: productQuery,
-        },
-      },
-      attributes: [
-        'id',
-        'product',
-        'canceled_at',
-        'start_date',
-        'end_date',
-        'recipient_id',
-        'signature_id',
-        'deliveryman_id',
-      ],
-      include: [
-        {
-          model: Recipient,
-          as: 'recipient',
-          attributes: ['nome', 'rua', 'numero', 'complemento', 'cidade', 'estado', 'cep'],
-        },
-        {
-          model: Deliveryman,
-          as: 'deliveryman',
-          attributes: ['name', 'email'],
-        },
-        {
-          model: Signature,
-          as: 'signature',
-          attributes: ['path', 'url'],
-        },
-      ],
-      limit: 20,
-      offset: (page - 1) * 20,
-      order: [['created_at', 'ASC']],
-    });
+    if (id) {
+      const deliveryExists = await Delivery.findByPk(id);
+
+      if (!deliveryExists) {
+        return res.status(400).json({ error: 'Delivery not found.' });
+      }
+
+      return res.json(deliveryExists);
+    }
+
+    if (page) {
+      const limit = 6;
+
+      const where = q ? { product: { [Op.iLike]: `%${q}%` } } : {};
+
+      const deliveriesCount = await Delivery.count({ where });
+
+      const lastPage = page * limit >= deliveriesCount;
+
+      const deliveries = await Delivery.findAll({
+        where,
+        limit,
+        offset: (page - 1) * limit,
+        attributes: [
+          'id',
+          'product',
+          'canceled_at',
+          'start_date',
+          'end_date',
+          'recipient_id',
+          'signature_id',
+          'deliveryman_id',
+        ],
+        include: [
+          {
+            model: Recipient,
+            as: 'recipient',
+            attributes: [
+              'nome',
+              'rua',
+              'numero',
+              'complemento',
+              'cidade',
+              'estado',
+              'cep',
+            ],
+          },
+          {
+            model: Deliveryman,
+            as: 'deliveryman',
+            attributes: ['name', 'email'],
+          },
+          {
+            model: Signature,
+            as: 'signature',
+            attributes: ['path', 'url'],
+          },
+        ],
+        order: [['created_at', 'ASC']],
+      });
+
+      return res.json({ lastPage, content: deliveries });
+    }
+
+    const deliveries = await Delivery.findAll();
 
     return res.json(deliveries);
   }

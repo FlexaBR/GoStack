@@ -1,8 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
 
-import arrowDownIcon from '~/assets/ic_keyboard_arrow_down_24px.svg';
-
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -75,12 +73,13 @@ export const Container = styled.div`
   background: #fff;
   border-radius: 4px;
   width: 900px;
-  height: 220px;
+  height: 401px;
   margin: 0 auto;
   padding: 30px 30px;
 
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 
   label {
     color: #444444;
@@ -90,14 +89,15 @@ export const Container = styled.div`
 
   input {
     height: 45px;
-    width: 405px;
+    width: 840px;
     font-size: 16px;
     padding: 0 15px;
     border-radius: 4px;
     border: 1px solid #dddddd;
     margin-top: 8px;
-    background: url(${arrowDownIcon}) no-repeat center right 10px #fff;
+    background: #fff;
     color: #000;
+    margin-bottom: 20px;
   }
 
   span {
@@ -112,68 +112,53 @@ export const Container = styled.div`
     }
   }
 
-  .two {
+  .form {
     display: flex;
-    justify-content: space-between;
-    width: 840px;
-    height: 80px;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    justify-content: flex-start;
+    align-items: center;
+  }
 
-    .two-one {
-      width: 420px;
-    }
-    .two-two {
-      width: 420px;
-      padding: 0 0 0 15px;
-    }
+  .img {
+    display: flex;
+    width: 150px;
+    height: 150px;
+    border: 1px dashed #dddddd;
+    border-radius: 50%;
+    margin-bottom: 20px;
 
-    ul {
-      position: absolute;
-      width: 405px;
-      background: #fff;
-      position: fixed;
-      z-index: 1;
+    label {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
 
-      border: 1px solid #dddddd;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      li {
-        height: 25px;
-        display: flex;
-        align-items: center;
+      img {
+        width: 100%;
+        height: 100%;
+        background: #dddddd;
+        border: 1px dashed #dddddd;
+        border-radius: 50%;
+      }
 
-        button {
-          width: 100%;
-          height: 100%;
-          text-align: inherit;
-          font-size: 16px;
-          color: #444444;
-          padding: 0 15px;
-          border: none;
-          background: transparent;
-        }
-
-        &:hover {
-          background-color: #7159c1;
-
-          button {
-            font-weight: 900;
-            color: #fff;
-          }
-        }
+      > p {
+        color: #dddddd;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        white-space: nowrap;
       }
     }
   }
 
-  .one {
+  .texto {
     display: flex;
     flex-direction: column;
-    width: 840px;
-    height: 80px;
-    padding-top: 10px;
-
-    input {
-      width: 100%;
-      background: #fff;
-      height: 45px;
-    }
   }
 `;

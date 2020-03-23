@@ -14,7 +14,45 @@ class DeliveryController {
     const { id, page, q } = req.query;
 
     if (id) {
-      const deliveryExists = await Delivery.findByPk(id);
+      const deliveryExists = await Delivery.findOne({
+        where: {
+          id,
+        },attributes: [
+          'id',
+          'product',
+          'canceled_at',
+          'start_date',
+          'end_date',
+          'recipient_id',
+          'signature_id',
+          'deliveryman_id',
+        ],
+        include: [
+          {
+            model: Recipient,
+            as: 'recipient',
+            attributes: [
+              'nome',
+              'rua',
+              'numero',
+              'complemento',
+              'cidade',
+              'estado',
+              'cep',
+            ],
+          },
+          {
+            model: Deliveryman,
+            as: 'deliveryman',
+            attributes: ['name', 'email'],
+          },
+          {
+            model: Signature,
+            as: 'signature',
+            attributes: ['path', 'url'],
+          },
+        ],
+      });
 
       if (!deliveryExists) {
         return res.status(400).json({ error: 'Delivery not found.' });

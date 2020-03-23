@@ -6,7 +6,9 @@ import SignIn from '../pages/SignIn';
 import Deliveries from '../pages/Deliveries';
 import DeliveryForm from '../pages/Deliveries/DeliveryForm';
 import Deliverymans from '../pages/Deliverymans';
+import DeliverymanForm from '../pages/Deliverymans/DeliverymanForm';
 import Recipients from '../pages/Recipients';
+import RecipientForm from '../pages/Recipients/RecipientForm';
 import Problems from '../pages/Problems';
 
 import { items } from '~/components/Header/navigation';
@@ -29,6 +31,12 @@ export default function Routes() {
         navItem={items.deliveries.name}
         isPrivate
       />
+      <Route
+        path={`${items.deliveries.route}/:id`}
+        component={DeliveryForm}
+        navItem={items.deliveries.name}
+        isPrivate
+      />
 
       <Route
         path={items.deliverymans.route}
@@ -37,6 +45,18 @@ export default function Routes() {
         isPrivate
         exact
       />
+      <Route
+        path={`${items.deliverymans.route}/new`}
+        component={DeliverymanForm}
+        navItem={items.deliverymans.name}
+        isPrivate
+      />
+      <Route
+        path={`${items.deliverymans.route}/:id`}
+        component={DeliverymanForm}
+        navItem={items.deliverymans.name}
+        isPrivate
+      />
 
       <Route
         path={items.recipients.route}
@@ -44,6 +64,18 @@ export default function Routes() {
         navItem={items.recipients.name}
         isPrivate
         exact
+      />
+      <Route
+        path={`${items.recipients.route}/new`}
+        component={RecipientForm}
+        navItem={items.recipients.name}
+        isPrivate
+      />
+      <Route
+        path={`${items.recipients.route}/:id`}
+        component={RecipientForm}
+        navItem={items.recipients.name}
+        isPrivate
       />
 
       <Route

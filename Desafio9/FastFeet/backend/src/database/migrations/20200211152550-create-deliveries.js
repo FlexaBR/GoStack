@@ -12,21 +12,23 @@ module.exports = {
         references: { model: 'recipients', key: 'id' },
         allowNull: true,
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+
       },
       deliveryman_id: {
         type: Sequelize.INTEGER,
         references: { model: 'deliverymans', key: 'id' },
         allowNull: true,
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
       },
       signature_id: {
         type: Sequelize.INTEGER,
         references: { model: 'signatures', key: 'id' },
         allowNull: true,
         onUpdate: 'CASCADE',
-        onDelete: 'SET NULL',
+        onDelete: 'SET NULL', // sem isso garante a integriddade referencial,
+        //não deleta se estiver vinculado
+        // como no deliveryman não tem, se o deliveryman estiver em algum pedido
+        // este deliveryman não pode ser excluido.
       },
       product: {
         type: Sequelize.STRING,

@@ -65,4 +65,9 @@ export const Wrapper = styled.div`
       padding-bottom: 0;
     }
   }
+
+  button:active {
+    outline: none;
+    border: none;
+  }
 `;

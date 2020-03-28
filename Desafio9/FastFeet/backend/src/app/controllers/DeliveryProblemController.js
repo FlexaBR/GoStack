@@ -53,7 +53,7 @@ class DeliveryProblemController {
     const { description } = req.body;
 
     const problem = await Dp.create({
-      delivery_id: delivery_id,
+      delivery_id,
       description,
     });
 

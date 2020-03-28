@@ -1,19 +1,19 @@
+/* eslint-disable react/no-this-in-sfc */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { FaPlus } from 'react-icons/fa';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import history from '~/services/history';
 
 import Title from '~/components/Title';
 import DropDown from '~/components/DropDown';
+import DataHeader from '~/components/DataHeader';
 
 import api from '~/services/api';
 
 import {
   Container,
-  DataHeader,
   Data,
   Initials,
   NoData,
@@ -62,6 +62,7 @@ export default function Deliverymans() {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   function handleNameChange(e) {
     setName(e.target.value);
   }
@@ -122,21 +123,13 @@ export default function Deliverymans() {
     <Container>
       <Title title="Gerenciando entregadores" />
 
-      <DataHeader>
-        <span>
-          <input
-            name="name"
-            placeholder="Buscar por entregadores"
-            onKeyDown={event => event.key === 'Enter' && loadDeliverymans(1)}
-            onChange={handleNameChange}
-          />
-        </span>
-
-        <button type="button" onClick={() => history.push('/deliverymans/new')}>
-          <FaPlus color="#FFF" size={16} />
-          <span>CADASTRAR</span>
-        </button>
-      </DataHeader>
+      <DataHeader
+        name="name"
+        placeholder="Buscar por entregadores"
+        load={() => this.loadDeliverymans(1)}
+        change={() => this.handleNameChange()}
+        click={() => history.push('/deliverymans/new')}
+      />
 
       {deliverymans.length ? (
         <>

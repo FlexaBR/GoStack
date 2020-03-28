@@ -1,20 +1,20 @@
+/* eslint-disable react/no-this-in-sfc */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { FaPlus } from 'react-icons/fa';
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 import { parseISO, format } from 'date-fns';
 
 import history from '~/services/history';
 
 import Title from '~/components/Title';
+import DataHeader from '~/components/DataHeader';
 import DropDown from '~/components/DropDown';
 
 import api from '~/services/api';
 
 import {
   Container,
-  DataHeader,
   Data,
   Initials,
   NoData,
@@ -109,10 +109,6 @@ export default function Deliveries() {
     }
   }
 
-  function handleProductChange(e) {
-    setProduct(e.target.value);
-  }
-
   function handleMenu(id) {
     const newBbj = deliveries.map(item => {
       if (item.id === id) {
@@ -178,21 +174,12 @@ export default function Deliveries() {
     <Container>
       <Title title="Gerenciando encomendas" />
 
-      <DataHeader>
-        <span>
-          <input
-            name="product"
-            placeholder="Buscar por encomendas"
-            onKeyDown={event => event.key === 'Enter' && loadDeliveries(1)}
-            onChange={handleProductChange}
-          />
-        </span>
-
-        <button type="button" onClick={() => history.push('/deliveries/new')}>
-          <FaPlus color="#FFF" size={16} />
-          <span>CADASTRAR</span>
-        </button>
-      </DataHeader>
+      <DataHeader
+        name="product"
+        placeholder="Buscar por encomendas"
+        change={e => setProduct(e.target.value)}
+        click={() => history.push('/deliveries/new')}
+      />
 
       {deliveries.length ? (
         <>

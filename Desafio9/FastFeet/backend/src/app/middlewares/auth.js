@@ -27,13 +27,11 @@ export default async (req, res, next) => {
     });
 
     if (!checkIsAdmin) {
-      return res
-        .status(401)
-        .json({ error: 'User is not admin' });
+      return res.status(401).json({ error: 'User is not admin' });
     }
 
     return next();
   } catch (err) {
     return res.status(401).json({ error: 'Token invalid' });
   }
-}
+};

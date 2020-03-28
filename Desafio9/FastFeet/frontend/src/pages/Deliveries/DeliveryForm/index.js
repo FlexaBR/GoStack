@@ -57,7 +57,7 @@ export default function FormPage({ match }) {
       setTextHeader('Edição de encomendas');
       loadDelivery(match.params.id);
     }
-  }, [match.params, delivery, product, recipient, deliveryman]);
+  }, [match.params]);
 
   async function loadRecipients() {
     const response = await api.get('recipients', {

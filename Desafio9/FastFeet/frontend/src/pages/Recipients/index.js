@@ -1,25 +1,18 @@
+/* eslint-disable react/no-this-in-sfc */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { FaPlus } from 'react-icons/fa';
 import { MdEdit, MdDeleteForever } from 'react-icons/md';
 
 import history from '~/services/history';
 
 import Title from '~/components/Title';
+import DataHeader from '~/components/DataHeader';
 import DropDown from '~/components/DropDown';
 
 import api from '~/services/api';
 
-import {
-  Container,
-  DataHeader,
-  Data,
-  NoData,
-  Paginator,
-  DotCircle,
-  Alert,
-} from './styles';
+import { Container, Data, NoData, Paginator, DotCircle, Alert } from './styles';
 
 export default function Recipients() {
   const [recipients, setRecipients] = useState([]);
@@ -56,6 +49,7 @@ export default function Recipients() {
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   function handleNameChange(e) {
     setNome(e.target.value);
   }
@@ -116,21 +110,13 @@ export default function Recipients() {
     <Container>
       <Title title="Gerenciando destinatários" />
 
-      <DataHeader>
-        <span>
-          <input
-            name="nome"
-            placeholder="Buscar por destinatários"
-            onKeyDown={event => event.key === 'Enter' && loadRecipients(1)}
-            onChange={handleNameChange}
-          />
-        </span>
-
-        <button type="button" onClick={() => history.push('/recipients/new')}>
-          <FaPlus color="#FFF" size={16} />
-          <span>CADASTRAR</span>
-        </button>
-      </DataHeader>
+      <DataHeader
+        name="nome"
+        placeholder="Buscar por destinatários"
+        load={() => this.loadRecipients(1)}
+        change={() => this.handleNameChange()}
+        click={() => history.push('/recipients/new')}
+      />
 
       {recipients.length ? (
         <>

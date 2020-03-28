@@ -49,7 +49,6 @@ class RecipientController {
     const recipients = await Recipient.findAll();
 
     return res.json(recipients);
-
   }
 
   async store(req, res) {
@@ -86,7 +85,7 @@ class RecipientController {
       complemento,
       estado,
       cidade,
-      cep
+      cep,
     } = await Recipient.create(req.body);
 
     return res.json({

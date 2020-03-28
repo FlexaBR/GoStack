@@ -1,39 +1,10 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
-import { actionButton } from '~/styles/util';
-
-import searchIcon from '~/assets/searchIcon.svg';
 
 export const Container = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 0 120px;
-`;
-
-export const DataHeader = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  input {
-    width: 237px;
-    height: 36px;
-    border: 1px solid #dddddd;
-    border-radius: 4px;
-    padding: 0 12px 0 35px;
-    color: #999999;
-    font-size: 14px;
-    background: url(${searchIcon}) no-repeat center left 10px #ffffff;
-  }
-
-  button {
-    ${actionButton}
-    width: 142px;
-    height: 36px;
-    span {
-      margin-left: 8px;
-    }
-  }
 `;
 
 export const NoData = styled.div`

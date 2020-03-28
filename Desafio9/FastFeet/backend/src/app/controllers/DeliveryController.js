@@ -17,7 +17,8 @@ class DeliveryController {
       const deliveryExists = await Delivery.findOne({
         where: {
           id,
-        },attributes: [
+        },
+        attributes: [
           'id',
           'product',
           'canceled_at',

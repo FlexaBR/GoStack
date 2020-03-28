@@ -1,5 +1,11 @@
 import { Router } from 'express';
 
+// Colocar o Brute principalmente na rote de autenticação,
+// para bloquear tentativas sucessivas de login
+import Brute from 'express-brute';
+// Colocar o contador de tentativas de acesso (com erro) no Redis
+import BruteRedis from 'express-brute-redis';
+
 import multer from 'multer';
 import multerConfig from './config/multer';
 
@@ -25,8 +31,16 @@ const routes = new Router();
 // Referente a envio de arquivos
 const upload = multer(multerConfig);
 
+const bruteStore = new BruteRedis({
+  host: process.env.REDIS_HOST,
+  port: process.env.REDIS_PORT,
+});
+const bruteForce = new Brute(bruteStore);
+
 routes.post('/users', UserController.store);
-routes.post('/sessions', SessionController.store);
+
+// bruteForce.prevent: middleware do Brute para bloquear tentativas sucessivas
+routes.post('/sessions', bruteForce.prevent, SessionController.store);
 
 // Listagem das entregas pendente/concluídas/canceladas pelo entregador
 routes.get('/deliveryman/:id/deliveries', DeliveriesOpenedController.index);
